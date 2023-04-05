@@ -1,0 +1,35 @@
+http = require('http')
+
+url = require('url')
+
+querystring = require('querystring');
+
+
+
+function onRequest(req, res) {
+
+  var path = url.parse(req.url).pathname
+
+  console.log("Request for " + path + " received")
+
+  
+
+  var query = url.parse(req.url).query
+
+  var name = querystring.parse(query)["username"]
+
+  var email = querystring.parse(query)["email"]
+
+
+
+  res.write("hello "+ name +"your mail is" + email + " has been registerd successfully")
+
+  res.end();
+
+}
+
+
+
+http.createServer(onRequest).listen(7777)
+
+console.log("Server has started... ")
